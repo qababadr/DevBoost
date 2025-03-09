@@ -1,0 +1,43 @@
+{
+    "name": "badrqaba/devboost",
+    "description": "DevBoost is a powerful Laravel development acceleration package designed to streamline your workflow, automate repetitive tasks, and enhance productivity. It provides a suite of tools for rapid scaffolding, optimized configurations, and seamless integration with Laravel’s ecosystem. With built-in support for advanced debugging, database management, and API handling, DevBoost helps developers build robust applications faster while maintaining clean, efficient code. Whether you're working on a small project or a large-scale application, DevBoost ensures a smooth and efficient development experience. 🚀",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "BadrQaba\\DevBoost\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Badr Qaba",
+            "email": "qababadr@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "alpha",
+    "require": {
+        "php": "^8.0.2",
+        "doctrine/dbal": "^3.4",
+        "guzzlehttp/guzzle": "^7.2",
+        "laravel/framework": "^9.2",
+        "laravel/sanctum": "^2.14.1",
+        "laravel/tinker": "^2.7"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.9.1",
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^6.1",
+        "phpunit/phpunit": "^9.5.10"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "BadrQaba\\DevBoost\\DevBoostServiceProvider"
+            ],
+            "aliases": {
+                "DevBoost": "BadrQaba\\DevBoost\\Facades\\DevBoost"
+            }
+        }
+   }
+}
