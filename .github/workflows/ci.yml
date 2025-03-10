@@ -48,6 +48,10 @@ jobs:
           
           VERSION="v1.0.0"
           
+          # Set Git configuration for push
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "github-actions@github.com"
+
           # Create the Git tag
           git tag $VERSION
           
