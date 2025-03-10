@@ -45,10 +45,16 @@ jobs:
         if: success()
         run: |
           echo "Deploying to GitHub Release..."
+          
           VERSION="v1.0.0"
+          
+          # Create the Git tag
           git tag $VERSION
-          git push origin $VERSION
+          
+          # Push the tag using the GITHUB_TOKEN for authentication
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} $VERSION
 
+          # Create GitHub release
           curl -X POST \
             -H "Authorization: token $GITHUB_TOKEN" \
             -d '{"tag_name": "'$VERSION'", "name": "'$VERSION' Release", "body": "Release description"}' \
