@@ -1,0 +1,54 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main # Trigger pipeline when pushing to the 'main' branch
+  pull_request:
+    branches:
+      - main # Trigger pipeline for pull requests to 'main'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up PHP environment
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.0"
+
+      # Step 3: Install dependencies using Composer
+      - name: Install dependencies
+        run: |
+          composer install --no-interaction
+
+      # Step 4: Run tests
+      - name: Run Tests
+        run: |
+          ./vendor/bin/phpunit
+
+      # Step 5: Deploy to GitHub (if tests pass)
+      - name: Deploy to GitHub (Create Release)
+        if: success() # Only run if tests pass
+        run: |
+          echo "Deploying to GitHub Release..."
+
+          # Create a new release in GitHub
+          GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} # GitHub provides this automatically for authentication
+
+          # Create a Git tag and push it (assuming versioning follows tags)
+          VERSION="v1.0.0"  # Adjust the version number as per your needs
+          git tag $VERSION
+          git push origin $VERSION
+
+          # Create the GitHub release (a new release will be created with the tag)
+          curl -X POST \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -d '{"tag_name": "'$VERSION'", "name": "'$VERSION' Release", "body": "Release description"}' \
+            https://api.github.com/repos/${{ github.repository }}/releases
