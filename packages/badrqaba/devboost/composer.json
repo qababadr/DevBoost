@@ -3,6 +3,7 @@
     "description": "DevBoost is a powerful Laravel development acceleration package designed to streamline your workflow, automate repetitive tasks, and enhance productivity. It provides a suite of tools for rapid scaffolding, optimized configurations, and seamless integration with Laravel’s ecosystem. With built-in support for advanced debugging, database management, and API handling, DevBoost helps developers build robust applications faster while maintaining clean, efficient code. Whether you're working on a small project or a large-scale application, DevBoost ensures a smooth and efficient development experience. 🚀",
     "type": "library",
     "license": "MIT",
+    "homepage": "https://github.com/qababadr/DevBoost",
     "autoload": {
         "psr-4": {
             "BadrQaba\\DevBoost\\": "src/"
