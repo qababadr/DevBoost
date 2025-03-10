@@ -23,17 +23,22 @@ jobs:
         with:
           php-version: "8.0"
 
-      # Step 3: Install dependencies using Composer
+      # Step 3: Run Composer Update (to sync composer.lock)
+      - name: Run Composer Update
+        run: |
+          composer update --no-interaction
+
+      # Step 4: Install dependencies using Composer
       - name: Install dependencies
         run: |
           composer install --no-interaction
 
-      # Step 4: Run tests
+      # Step 5: Run tests
       - name: Run Tests
         run: |
           ./vendor/bin/phpunit
 
-      # Step 5: Deploy to GitHub (if tests pass)
+      # Step 6: Deploy to GitHub (if tests pass)
       - name: Deploy to GitHub (Create Release)
         if: success() # Only run if tests pass
         run: |
